@@ -1064,26 +1064,84 @@ Spring实例化的配置就是Spring帮我们创建Bean的方式，分为两种�
 
 ![image-20250222003930671](Spring.assets/image-20250222003930671.png)
 
-好，那我们继续啊，刚才呢，我们已经用这个构造方法啊，去可以配置我们的这个bin是吧，不管是有餐的还是无餐的，它本质都是我们的构造方法。那刨除构造方法之外呢？我们说还有一种就是工厂方式去实例化我们的bin啊，那么看一下工厂方式，工厂方式呢？在这儿我又给大家归结为三种啊。第一种叫共态静态工厂方法。第二种呢，叫实力工厂方法，第三种呢，
-呃，实现我们的这个的方式，那第三种啊，在这我一句话半句话说不明白，但第一种第二种啊，我可以稍微然后介绍一下啊。静态工厂方法说白，就是说什么就是我定一个工厂，哎，我定一个工厂就自定义一个工厂，那这个工厂内部呢，提供个静态方法。在这个静态方法内部呢，我去产生一个并啊，最终这个并呢，
-哎，我要交给spring容器，然后去帮我管理。OK，那第二种呢？实例工厂方法呢？呃，其实相对静态就是说我有个工厂，这工厂内部的方法呢？是非静态的。啊，那那最终这个非静态方法，然后产生的bin呢，就是返回值啊，最终我交给spring容器，
-然后去管理啊。它们其实最主要的区别是在于什么呢？在于静态工厂方法，它是不是方法是静态的啊？非静态工厂方法啊？它的这个这个方法是非静态的，所以我们在配置的时候，我们要知道。静态工厂方法，它在产生这个就是在调用它静态方法时，我这个工厂静态工厂它不需要现有对象。对吧，因为静态方法直接，然后这个匿名去调静态方法，就但实例工厂方法就不一样了，
-你这个然后实例工厂必须需要工厂对象。然后再说用工厂对象去调对应的一些方法啊，这是它一个最主要的区别，行吧，那下面我们就配一个吧，咱们配一个啊。呃，我们回到idea当中。呃，首先在这儿呢，我再建一个package。啊，就叫factory吧，叫factory好在这个内部呢，我去创建一个就叫。
-叫static吧啊，叫static，然后这个这儿吧，别叫static呢。我叫bin。叫my be factory。factory是吧诶一。可以吧，脉变factory 1好，创建好之后呢？内部我们提供一个静态方法就行。static返回值呢，你随便我们就返回个do吧好吧user dao。啊，就叫user dao。
-啊，最终我在这return一个。new一个。有点电影m片。是不是写完了吧？写完之后，现在然后我们去产生b原先是怎么产生的？就原先是不是spring容器，它通过这个权限的名儿。就是那个全包名儿啊，反射创建好对象，放到容器当中是吧？而现在呢，是我们spring spring这个容器帮你去调这个。力的这个静态方法最终将返回的这个对象存储到spring容器当中。
-啊，是一个过程吧好，那下面呢？我们主要在于怎么去配置吧？怎么去配右键copy它的权限的名儿？回到我们的配置文件当中。哎，在这。诶，你原先怎么配？现在你还怎么配？你比如原先我们是不是先配个这个这个这个ID？比如我叫叫什么呀？叫user。do.
-一行吧，对应的权限里面是它。它那如果你这样配完之后，这跟原先我配个普通的是不是一样的是吧？当你启动时，那spring容器会干什么事儿呢？会按照你的全限定名儿给你创建，创建对象就使用它对象嘛，这个就走的是无三构造对不对，然后呢，创建完对象之后放到容器当中，那放到容器当中。是不是这个bin的有个bin name呀？那此时的bin name是不是叫ID uz doe对不对？但但是呢，
-现在我是想找它的方法，所以说在这个地方你加什么呀？加个叫。指定它的那个方法啊，我的方法是不是就叫user du这个方法了？是吧哎，所以说你在这儿就指定这个方法叫那此时当你这样配完之后，磁盘容器当看到时哎在分在这个解析时哦发现哦，你有个factory method，那我知道呢不是。把它变成对象。是找它内部的这个user do这个方法，把这个方法的返回值啊，当做这个对象，再以你指定的ID作为bna me。
-存储到容器当中。这能明白吧，好下边我们测试一下啊，先保证我的测试是没有问题的。呃，这些代码我先干掉吧，有容器呢。GE TB我叫什么名字诶？这pay你叫什么名字？是不是叫user doe对不对？好在这user doe。行吧，那就不不强转的啊，不强转的我在这user do我打一下地址就行执行。诶，
-稍等。你看是不是没问题，看看别看第一个，第一个是我们那构造打那个service构造打印的画啊，是不是最终我打印没有问题，是不是能创建吧？好能创建，那其实在这个地方呢，我可以再加个断点。走往里走一步。我们看谁呀？我们看那个就是那个当地时对不对？在这有b factory。又找不到了，它下边儿有个bfa x这儿呢，
-然后进去，然后有个singlet objects呃，不是这个吧哎，点进去。然后再点你找是不它有个user due？是不是user du 1吧啊？user du 1你再去点，你发现这个user du 1是不是就是user du ipl这对象对不对哎？它对应是这个对象并不是这个工厂对象啊。因为我这种配置spring容器是能识别的。okay，这点儿能听懂吧？但再回到这儿说，这种方式有什么用呢？这么麻烦，
-是不是？那叫什么用啊？大家想想啊。想想啊，第一个用处在于原先你在去呃，自己去创建这个病，让死命去管理的话，那你这个病在创建前后。你是没有办法去执行其他代码的。就是这个变，我说马上要创建呢是吧？创建之前我想干点事儿，原先你不好干，但通过这种工厂方式，那就那比如在这个地方。
-加个注释，就是说这个bin。创建之前之前我可以要进行一些其他的页面逻辑操作。对不对？那在创建之后呢？是不是也可以进行一些其他业务轨迹操作，比如我把它踢到外边是吧，然后执行完之后最终再把它返回？这能明白吧，所以你这个这个逻辑可以更加灵活一点。这是这是第一个是吧？那第二个原因呢？大家想想你看啊，还是说我们这些是不是都是我自定义的吧？啊，
-就是这个b factory也好啊，这个user dom PR也好，是不是都是自定义的是吧啊？大家在想，其实有一些啊，有一些bin是非我自定义的。就什么意思？就是人家炸包已经给你定义好的。就其他炸包啊，给你定义好的，比如说你在开发时，你不可能都是自定义的吧，你是不可能要演一些工具啊，或演一些，然后第三方的一些炸包啊，
-对不对？那如果第三方炸包当中的哎，某些病你也需要交给spring去管是吧？你是不是得配置？可能有时候这个病本身它就不是，然后通过有参构造和无参构造去生成的是吧？它可能就是通过某些静态方法产生的，而那些病你在配置时，你就可以用这种。什么呀，这种。静态构造就是静态工厂的方式，把它配到spring容器当中。啊，那打个比方，
-比如说。大家知道我们这个什么呢？呃，我在这写一个啊，大家知道我们当时在开发时，我们的gd BC是吧？gd BC。GG BC是不是那个connection怎么去获取的？draw manager.当然，我这没导包啊，就装manager点儿，是不是有个get connection？tln是吧connection，然后这伪代码呢？
-因为这没导包，所以都爆红了是吧？哎，大家想哎，就这就这个方法是吧？那比如说它最终的反折是不是connection？是不是connection那如果现在我想让spring哎，帮我去管connection，那connection怎么去产生呢？是不是通过然后一个a的一个方法最终产生的connection呢？对吧，那此时我是不就可以把它看成是一个静态工厂方法产生connection？但这种方式不会这么配啊，你比方讲完之后回去真呃傻呵呵的咔咔的把那个connection要配到容器当中，用这种方式是吧，
-我就给大家打个比方，我现在暂时想不出来其他的呢是吧？就是说有很多，然后非我自定义的病它的，然后产生确实是通过，然后这种静态方法产生的，那此时我就可以用。哎，刚才学的这种什么呀？哎，静态工厂的方式进行配置啊。好吧，那就是关于静态工厂方式配置。我们的变啊。
+使用工厂方式去实例化Bean分为三种情况：
+
+- 静态工厂方法：我们自定义一个工厂，在这个工厂内部提供一个静态方法，在这个静态方法内部去创建一个Bean啊，最终这个Bean交给Spring容器帮我们管理。
+
+- 实例工厂方法：自定义一个工厂，这个工厂内部的方法是非静态的，最终这个非静态方法创建的Bean交给Spring容器去管理。
+
+  静态工厂方法和实例工厂方法的区别在于：静态工厂里面的方法是静态的，非静态工厂里面的方法是非静态的。所以我们在使用静态工厂方法创建Bean的时候，可以直接通过类名调用工厂里面的静态方法，不需要创建工厂对象。但是使用实例化工厂方法创建Bean的时候，必须先创建工厂对象，然后再用工厂对象去调用工厂里面的一些方法，这是它们最主要的区别。
+
+- 实现FactoryBean接口。
+
+```java
+package com.itheima.factory;
+
+import com.itheima.dao.UserDao;
+import com.itheima.dao.impl.UserDaoImpl;
+
+public class MyBeanFactory1 {
+
+    public static UserDao userDao() {
+        //Bean创建之前可以进行一些其他业务逻辑操作
+        return new UserDaoImpl();
+    }
+}
+
+
+
+package com.itheima.test;
+
+import com.itheima.dao.UserDao;
+import com.itheima.service.UserService;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+
+public class ApplicationContextTest {
+    public static void main(String[] args) {
+        ClassPathXmlApplicationContext applicationContext = new ClassPathXmlApplicationContext("applicationContext.xml");
+        Object userDao1 = applicationContext.getBean("userDao1");
+        System.out.println("userDao1");
+    }
+}
+```
+
+原来是Spring容器使用反射通过Bean的全限定名创建好Bean对象放到Spring容器当中，而现在是Spring容器帮我们调用工厂类当中的静态方法将返回的Bean对象存储到Spring容器当中。
+
+配置静态工厂方法：
+
+**applicationContext.xml文件：**
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="userDao1" class="com.itheima.factory.MyBeanFactory1" factory-method="userDao"></bean>
+
+    <bean id="userService" class="com.itheima.service.impl.UserServiceImpl"></bean>
+    
+    <bean id="userDao" class="com.itheima.dao.impl.UserDaoImpl"></bean>
+</beans>
+```
+
+重新定义一个bean标签，指定class属性为工厂的全限定名，id属性值自定义。到目前为止和原先配置普通的UerDaoImpl的bean标签是一样的。当我们启动程序时，Spring容器会按照bean标签里面的的全限定名使用无参构造创建bean对象，创建完Bean对象放到Spring容器当中，放到Spring容器当中的Bean的有一个beanName属性，此时的beanName的值是id属性值。
+
+但是现在我们是想通过工厂的静态方法去创建对象，所以在bean标签内部配置**factory-method**属性。
+
+* **factory-method**：指定使用工厂的哪个静态方法创建对象，factory-method属性值为静态方法名。此时当我们这样配置完之后，Spring容器解析bean标签时，发现bean标签有一个factory-method属性，就知道不是像之前一样使用反射通过无参构造创建工厂对象，而是找工厂内部的指定的静态方法，将静态方法返回的对象和bean标签指定的id属性值作为beanName的值，一起存储到容器当中。
+
+测试：
+
+![image-20250222181001820](Spring.assets/image-20250222181001820.png)
+
+![image-20250222181238099](Spring.assets/image-20250222181238099.png)
+
+使用静态工厂方法实例化Bean的好处：
+
+1. 之前Spring容器帮我们创建Bean，但是Beam在创建前后没有办法去执行其他业务逻辑，但通过静态工厂方式，在Bean创建之前可以进行一些其他的业务逻辑操作，在创建之后也可以进行一些其他业务逻辑操作，然后执行完之后再把Bean返回。所以使用静态工厂方法创建Bean的逻辑可以更加灵活一点。
+2. 静态工厂和UserDaoImpl都是我们自定义的，但是在开发中有一些Bean是非自定义的。比如在开发时引入第三方的jar包或者工具，如果第三方jar包当中的某些Bean也需要交给Spring容器去管理，那么我们也得对这些Bean进行配置，而且有时候这些Bean本身就不是通过有参构造或者无参构造去创建的，而是通过某些静态方法创建的，对于这些Bean在配置时，就可以用静态工厂的方式把它们配到Spring容器当中。比如：在JDBC操作中，获取Connection对象的代码是`DriverManager.getConnection();`返回值是一个Connection类型的对象，如果我想让Spring容器帮我们去管理Connection对象，这个Connection对象是通过DriverManager类的静态方法getConnection产生的，此时我们就可以看成是一个静态工厂方法产生的Connection对象，但是我们在JDBC中不会使用静态工厂方式产生Connection对象，这里就是举例说明一下。有很多非自定义的Bena的创建是通过静态方法产生的，此时我们就可以用静态工厂的方式进行配置。
 
 
 
